@@ -1137,7 +1137,7 @@ bool newuser( char *username )
      showansascrip( "NEWUSER2" );
      questionnaire( "NEWUSER"  );
 
-     user.lastDate.today();
+     //user.lastDate.today();
      user.lastTime.now();
      user.firstDate.today();
      user.lastNewFilesCheck.today();

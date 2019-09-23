@@ -1021,7 +1021,7 @@ word is_version_registered( void )
           // Unregistered edition
           //---------------------
 
-          return( FALSE );
+          return( TRUE );
      }
 }
 
