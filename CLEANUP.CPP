@@ -67,7 +67,7 @@ cleanup()
       user_online uo;
       uo.clear();
 
-      user.lastDate       = login_date;
+      //user.lastDate       = login_date;
       user.lastTime       = login_time;
       user.timeUsed      += timer.used();
       user.totalTimeUsed += timer.online();
