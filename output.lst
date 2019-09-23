@@ -1,0 +1,43 @@
+tasm /o /mx /dMEM_MOD=LARGE exec.asm
+
+Assembling file:   exec.asm
+**Error** exec.asm(133) Illegal immediate
+**Error** exec.asm(136) Need right square bracket
+*Warning* exec.asm(136) [Constant] assumed to mean immediate constant
+**Error** exec.asm(356) Need right square bracket
+*Warning* exec.asm(356) [Constant] assumed to mean immediate constant
+**Error** exec.asm(365) Need right square bracket
+*Warning* exec.asm(365) [Constant] assumed to mean immediate constant
+**Error** exec.asm(366) Need right square bracket
+*Warning* exec.asm(366) [Constant] assumed to mean immediate constant
+**Error** exec.asm(540) Illegal immediate
+**Error** exec.asm(566) Need right square bracket
+*Warning* exec.asm(566) Argument needs type override
+**Error** exec.asm(586) Need right square bracket
+*Warning* exec.asm(586) Argument needs type override
+**Error** exec.asm(636) Illegal immediate
+**Error** exec.asm(643) Need right square bracket
+*Warning* exec.asm(643) Argument needs type override
+**Error** exec.asm(653) Illegal immediate
+**Error** exec.asm(660) Illegal immediate
+**Error** exec.asm(842) Need right square bracket
+*Warning* exec.asm(842) [Constant] assumed to mean immediate constant
+**Error** exec.asm(905) Need right square bracket
+*Warning* exec.asm(905) [Constant] assumed to mean immediate constant
+**Error** exec.asm(907) Need right square bracket
+*Warning* exec.asm(907) [Constant] assumed to mean immediate constant
+Error messages:    15
+Warning messages:  10
+Passes:            1
+Remaining memory:  381k
+
+
+tasm /o /mx /dMEM_MOD=LARGE fossil.asm
+
+Assembling file:   fossil.asm
+**Error** fossil.asm(232) Symbol already defined elsewhere: @@EXIT
+Error messages:    1
+Warning messages:  None
+Passes:            1
+Remaining memory:  387k
+

@@ -1,0 +1,338 @@
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤด
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  00h  ณ Set BaudRate  ณ AL = Baud/Parity/SB   ณ AX = Status bits      ณ BaudRate code in AL:                  ณ
+ณ       ณ               ณ DX = Port number      ณ (See function 03h)    ณ Bits [7:5] 000 = 19200, 001 = 38400,  ณ
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ 010 = 300, 011 = 600, 100 = 1200,     ณ
+ณ       ณ               ณ                       ณ                       ณ 101 = 2400, 110 = 4800, 111 = 9600.   ณ
+ณ       ณ               ณ                       ณ                       ณ Parity: [4:3] 00 or 10 = none,        ณ
+ณ       ณ               ณ                       ณ                       ณ 01 = odd, 11 = even.                  ณ
+ณ       ณ               ณ                       ณ                       ณ StopBits: [2:2] 0 = 1, 1 = 2          ณ
+ณ       ณ               ณ                       ณ                       ณ CharLength: 5 bits plus value [1:0]   ณ
+ณ       ณ               ณ                       ณ                       ณ Support for [4:0] = 00011 required of ณ
+ณ       ณ               ณ                       ณ                       ณ driver, others optional               ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  01h  ณ Transmit      ณ AL = Character        ณ AX = Status bits      ณ Character is queued for transmission. ณ
+ณ       ณ character     ณ DX = Port number      ณ (See function 03h)    ณ If there is room in the transmitter   ณ
+ณ       ณ (wait for     ณ     (NOP if DX=00FFh) ณ                       ณ buffer when this call is made, the    ณ
+ณ       ณ  room in the  ณ                       ณ                       ณ character will be stored and control  ณ
+ณ       ณ  buffer)      ณ                       ณ                       ณ returned to caller. If the buffer is  ณ
+ณ       ณ               ณ                       ณ                       ณ full, the driver will wait for room.  ณ
+ณ       ณ               ณ                       ณ                       ณ This can be dangerous when used in    ณ
+ณ       ณ               ณ                       ณ                       ณ combination with flow control (see    ณ
+ณ       ณ               ณ                       ณ                       ณ Function 0Fh)                         ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  02h  ณ Receive       ณ DX = Port number      ณ AH = 00h              ณ The next character in the input ring  ณ
+ณ       ณ character     ณ     (NOP if DX=00FFh) ณ AL = Input character  ณ buffer is returned to the caller. If  ณ
+ณ       ณ (wait for     ณ                       ณ                       ณ none available, the driver will wait  ณ
+ณ       ณ available)    ณ                       ณ                       ณ for input.                            ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  03h  ณ StatusRequest ณ DX = Port number      ณ AX = Status bits      ณ Bits are:                             ณ
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ AH[6:6] 1 = Output buffer empty       ณ
+ณ       ณ               ณ                       ณ                       ณ AH[5:5] 1 = Output buffer not full    ณ
+ณ       ณ               ณ                       ณ                       ณ AH[1:1] 1 = Input buffer overrun      ณ
+ณ       ณ               ณ                       ณ                       ณ AH[0:0] 1 = Characters in input bufferณ
+ณ       ณ               ณ                       ณ                       ณ AL[7:7] 1 = Carrier Detect signal     ณ
+ณ       ณ               ณ                       ณ                       ณ AL[3:3] 1 = Always (never 0)          ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  04h  ณ Initialize    ณ DX = Port number      ณ AX = 1954h (success)  ณ Required before I/O can take place on ณ
+ณ       ณ driver (port) ณ    (DX=00FFh special) ณ BL = Max function     ณ comm port.  When DX = 00FFh,  then    ณ
+ณ       ณ               ณ                       ณ      supported,  not  ณ any initialization needed to make the ณ
+ณ       ณ               ณ                       ณ      incl. 7Eh - BFh  ณ keyboard/display available for FOSSIL ณ
+ณ       ณ               ณ {BX = 4F50H           ณ BH = FOSSIL revision  ณ use should be performed.  BX = 4F50h  ณ
+ณ       ณ               ณ  ES:CX = ^C flag byte}ณ      level of driver  ณ signals that ES:CX points to a flag   ณ
+ณ       ณ               ณ    (Optional)         ณ                       ณ byte in the application that the      ณ
+ณ       ณ               ณ                       ณ DTR raised on port    ณ driver should increment when its      ณ
+ณ       ณ               ณ                       ณ BaudRate preserved    ณ keyboard routines detect a Ctl-C.     ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤด
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  05h  ณ Deinitialize  ณ DX = Port number      ณ None                  ณ Disengages driver from comm port.     ณ
+ณ       ณ driver (port) ณ    (DX=00FFh special) ณ                       ณ Should be done when operations on the ณ
+ณ       ณ               ณ                       ณ DTR not changed       ณ port are complete.  IF DX = 00FFh,    ณ
+ณ       ณ               ณ                       ณ                       ณ then the initialization that was      ณ
+ณ       ณ               ณ                       ณ                       ณ performed when FOSSIL function 04h    ณ
+ณ       ณ               ณ                       ณ                       ณ with DX = 00FFh should be undone.     ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  06h  ณ Raise/lower   ณ AL = 01h - Raise DTR  ณ None                  ณ Used to control Data Terminal Ready   ณ
+ณ       ณ     DTR       ณ    = 00h - Lower DTR  ณ                       ณ signal line on com port. This line    ณ
+ณ       ณ               ณ DX = Port number      ณ DTR TRUE  if AL = 01h ณ usually has some effect on modem      ณ
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ     FALSE if AL = 00h ณ operation (most modems will drop      ณ
+ณ       ณ               ณ                       ณ                       ณ carrier if DTR is lowered, for        ณ
+ณ       ณ               ณ                       ณ                       ณ example).                             ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  07h  ณ Return system ณ None                  ณ AL = timer tick       ณ Returns statistics needed to do some  ณ
+ณ       ณ timer params  ณ                       ณ      interrupt number ณ critical timing in any MS-DOS system. ณ
+ณ       ณ               ณ                       ณ      (NOT vector)     ณ The interrupt number in AL can be     ณ
+ณ       ณ               ณ                       ณ AH = number of ticks  ณ used to intercept a timer interrupt   ณ
+ณ       ณ               ณ                       ณ      per second       ณ that happens (AH) times per second.   ณ
+ณ       ณ               ณ                       ณ DX = (apx.) number    ณ DX is essentially 1000/AH. Function   ณ
+ณ       ณ               ณ                       ณ      of mS / tick     ณ 16h is the preferred way to install   ณ
+ณ       ณ               ณ                       ณ                       ณ timer tick code. AH and DX should     ณ
+ณ       ณ               ณ                       ณ                       ณ be accurate for the 16h timer tick.   ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  08h  ณ Flush output  ณ DX = Port number      ณ None                  ณ This is used to wait for all output   ณ
+ณ       ณ    buffer     ณ     (NOP if DX=00FFh) ณ                       ณ to complete. If flow control is activeณ
+ณ       ณ               ณ                       ณ                       ณ it is possible for this code never to ณ
+ณ       ณ (wait for all ณ                       ณ                       ณ return control to the caller. (See    ณ
+ณ       ณ output to end)ณ                       ณ                       ณ function 0Fh)                         ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  09h  ณ Purge output  ณ DX = Port number      ณ None                  ณ Zero the output buffer. Returns to    ณ
+ณ       ณ    buffer     ณ     (NOP if DX=00FFh) ณ                       ณ the caller immediately. Characters    ณ
+ณ       ณ               ณ                       ณ                       ณ that have not been transmitted yet    ณ
+ณ       ณ (immediately  ณ                       ณ                       ณ are lost.                             ณ
+ณ       ณ zero buffer)  ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤด
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  0Ah  ณ Purge input   ณ DX = Port number      ณ None                  ณ Zeroes the input buffer. If any flow  ณ
+ณ       ณ    buffer     ณ     (NOP of DX=00FFh) ณ                       ณ control restraint has been employed   ณ
+ณ       ณ               ณ                       ณ                       ณ (dropping RTS or transmitting XOFF)   ณ
+ณ       ณ               ณ                       ณ                       ณ the port will be "released" (by doing ณ
+ณ       ณ               ณ                       ณ                       ณ the reverse, raising RTS or sending   ณ
+ณ       ณ               ณ                       ณ                       ณ XON). Returns to caller immediately.  ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  0Bh  ณ Transmit      ณ AL = Character        ณ AX = 0001h if sent    ณ Character is queued for transmission. ณ
+ณ       ณ character     ณ DX = Port number      ณ    = 0000h if not     ณ If there is room in the transmitter   ณ
+ณ       ณ ("no wait")   ณ     (NOP if DX=00FFh) ณ         sent          ณ buffer when this call is made, the    ณ
+ณ       ณ               ณ                       ณ                       ณ character will be stored and control  ณ
+ณ       ณ               ณ                       ณ                       ณ returned to caller with AX=1. If the  ณ
+ณ       ณ               ณ                       ณ                       ณ buffer is full, control is returned   ณ
+ณ       ณ               ณ                       ณ                       ณ to caller with AX=0. This allows the  ณ
+ณ       ณ               ณ                       ณ                       ณ application to make its own decisions ณ
+ณ       ณ               ณ                       ณ                       ณ on how to deal with "buffer full".    ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  0Ch  ณ "Peek ahead"  ณ DX = Port number      ณ AH = 00h              ณ The next character in the input ring  ณ
+ณ       ณ input buffer  ณ     (NOP if DX=00FFh) ณ AL = input character  ณ buffer is returned to the caller. If  ณ
+ณ       ณ (non-dest     ณ                       ณ      (if available)   ณ none available, the driver returns a  ณ
+ณ       ณ read-ahead)   ณ                       ณ AX = FFFFh (if none   ณ value of FFFFH. This "read" does not  ณ
+ณ       ณ               ณ                       ณ      (available)      ณ actually remove a character from the  ณ
+ณ       ณ               ณ                       ณ                       ณ input buffer!                         ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  0Dh  ณ "Peek ahead"  ณ  None                 ณ AX = keyboard char    ณ The next character in the keyboard    ณ
+ณ       ณ  KB buffer    ณ                       ณ      (if available)   ณ buffer is returned to the caller. If  ณ
+ณ       ณ (non-dest     ณ                       ณ AX = FFFFh (if none   ณ none available, the driver returns a  ณ
+ณ       ณ  read-ahead)  ณ                       ณ      available)       ณ value of FFFFH. This "read" does not  ณ
+ณ       ณ               ณ                       ณ                       ณ actually remove a character from the  ณ
+ณ       ณ               ณ                       ณ                       ณ input buffer! For function keys, IBM  ณ
+ณ       ณ               ณ                       ณ                       ณ PC scan codes must be returned.       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ  0Eh  ณ Read Keyboard ณ None                  ณ AX = keyboard char    ณ Return the next character from the    ณ
+ณ       ณ (wait if no   ณ                       ณ                       ณ keyboard buffer. Wait for a keystroke ณ
+ณ       ณ  char avail)  ณ                       ณ                       ณ if the buffer is empty. For function  ณ
+ณ       ณ               ณ                       ณ                       ณ keys, IBM PC scan codes are required. ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  0Fh  ณ Enable/Disableณ AL = Flow control     ณ None                  ณ AL[0:0] 1= enables remote to restrain |
+ณ       ณ com port flow ณ      bit mask         ณ                       ณ   FOSSIL transmitter using XON/XOFF;  |
+ณ       ณ    control    ณ DX = Port number      ณ                       ณ AL[1:1] 1= enables modem restraint of |
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ   FOSSIL transmitter using CTS and    |
+ณ       ณ               ณ                       ณ                       ณ   FOSSIL restraint of modem using RTS |
+ณ       ณ               ณ                       ณ                       ณ AL[3:3] 1= enables FOSSIL to restrain |
+ณ       ณ               ณ                       ณ                       ณ   remote using XON/XOFF.              |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  10h  ณ Enable/disableณ AL = Flags byte       ณ AX = 0001h - CtlC/K   ณ AL[0:0] 1 = enable/disable CtlC/CtlK  |
+ณ       ณ   Ctl-C/Ctl-K ณ DX = Port number      ณ        detected since ณ   check (driver will set internal flag|
+ณ       ณ   check,      ณ     (NOP if DX=00FFh) ณ        last call      ณ   which is returned by this function  |
+ณ       ณ Enable/disableณ                       ณ    = 0000h - CtlC/K   ณ   when it detects a CtlC/CtlK).       |
+ณ       ณ   transmitter ณ                       ณ        not detected   ณ AL[1:1] 1 = stop transmitter          |
+ณ       ณ               ณ                       ณ        since last     ณ         0 = release previous stop     |
+ณ       ณ               ณ                       ณ        call           ณ   This is used primarily for programs |
+ณ       ณ               ณ                       ณ                       ณ   that can't trust XON/XOFF at FOSSIL |
+ณ       ณ               ณ                       ณ                       ณ   level (such as BBS software).       |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  11h  ณ Set cursor    ณ DH = Row (0-based)    ณ None                  ณ Identical to IBM PC BIOS INT 10h,     |
+ณ       ณ location      ณ DL = Col (0-based)    ณ                       ณ subfunction 02h. FOSSIL should do     |
+ณ       ณ               ณ                       ณ                       ณ sanity checks but software should not |
+ณ       ณ               ณ                       ณ                       ณ assume that that is the case.         |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  12h  ณ Read Cursor   ณ None                  ณ DH = Row (0-based)    ณ Identical to IBM PC BIOS INT 10h,     |
+ณ       ณ Location      ณ                       ณ DL = Col (0-based)    ณ subfunction 03h.                      |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  13h  ณ Write char    ณ AL = Character        ณ None                  ณ ANSI processing is a requirement of   |
+ณ       ณ (ANSI support)ณ                       ณ                       ณ this call. It therefore should not be |
+ณ       ณ               ณ                       ณ                       ณ considered re-entrant, since DOS      |
+ณ       ณ               ณ                       ณ                       ณ might be used (via ANSI.SYS)          |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  14h  ณ Enable/disableณ AL = 01h - Enable     ณ None                  ณ FOSSIL will force the system to rebootณ
+ณ       ณ "watchdog"    ณ            watchdog   ณ                       ณ if Carrier Detect on the specified    ณ
+ณ       ณ               ณ    = 00h - Disable    ณ                       ณ port drops while "watchdog" is ON.    ณ
+ณ       ณ               ณ            watchdog   ณ                       ณ                                       ณ
+ณ       ณ               ณ DX = Port number      ณ                       ณ It is not necessary for the port to   ณ
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ be "active" (Function 04h) for this   ณ
+ณ       ณ               ณ                       ณ                       ณ function to be used.                  ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  15h  ณ Write char    ณ AL = Character        ณ None                  ณ Write character to screen using       |
+ณ       ณ (re-entrant)  ณ                       ณ                       ณ re-entrant code. ANSI processing may  |
+ณ       ณ               ณ                       ณ                       ณ not be assumed. This call may be used |
+ณ       ณ               ณ                       ณ                       ณ by DOS device drivers.                |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  16h  ณ Insert/delete ณ AL = 01h - Insert     ณ AX = 0000h - operationณ Allows FOSSIL to manage timer tick    |
+ณ       ณ function from ณ    = 00h - Delete     ณ      was successful   ณ chain, which provides some measure of |
+ณ       ณ timer tick    ณ ES = Function segment ณ    = FFFFh - operationณ security over just snagging the       |
+ณ       ณ               ณ DX = Function offset  ณ      was unsuccessful ณ interrupt. Use "insert" instead of    |
+ณ       ณ               ณ                       ณ                       ณ grabbing the vector and "remove" in   |
+ณ       ณ               ณ                       ณ                       ณ place of restoring it.                |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  17h  ณ Reboot system ณ  AL = 00h - Cold boot ณ  None (hopefully!)    ณ Provides a machine-independent way    |
+ณ       ณ               ณ     = 01h - Warm boot ณ                       ณ for a "troubled" application to reset |
+ณ       ณ               ณ                       ณ                       ณ the system. Some machines may not     |
+ณ       ณ               ณ                       ณ                       ณ support both "flavors" of bootstrap,  |
+ณ       ณ               ณ                       ณ                       ณ in which case the setting of AL will  |
+ณ       ณ               ณ                       ณ                       ณ not have any effect.                  |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  18h  ณ Read block    ณ CX = Count            ณ AX = Number of chars  ณ Transfer as many characters as are    |
+ณ       ณ               ณ ES = Segment of       ณ      actually moved   ณ available into the specified user     |
+ณ       ณ               ณ      user buffer      ณ                       ณ buffer, up to the maximum specified   |
+ณ       ณ               ณ DI = Offset of        ณ                       ณ in CX. ES and DI will not be modified |
+ณ       ณ               ณ      user buffer      ณ                       ณ by this call. The actual number of    |
+ณ       ณ               ณ DX = Port number      ณ                       ณ characters transferred will be in AX. |
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ This function does not wait for more  |
+ณ       ณ               ณ                       ณ                       ณ characters to become available if the |
+ณ       ณ               ณ                       ณ                       ณ number in CX exceeds the number of    |
+ณ       ณ               ณ                       ณ                       ณ characters currently stored.          |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  19h  ณ Write block   ณ CX = Count            ณ AX = number of chars  ณ Transfer as many characters as will   |
+ณ       ณ               ณ ES = Segment of       ณ      actually moved   ณ fit, from the specified user buffer   ณ
+ณ       ณ               ณ      user buffer      ณ                       ณ into the output buffer, up to the     ณ
+ณ       ณ               ณ DI = Offset of        ณ                       ณ maximum specified in CX. ES and DI    ณ
+ณ       ณ               ณ      user buffer      ณ                       ณ will not be modified by this call.    ณ
+ณ       ณ               ณ DX = Port number      ณ                       ณ The actual number of characters       ณ
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ transferred will be in AX.            ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  1Ah  ณ Start/stop    ณ AL = 01h - Start breakณ None                  ณ Used for special applications such as |
+ณ       ณ sending break ณ      001 - Stop break ณ                       ณ certain high speed modems. Resets     |
+ณ       ณ               ณ DX = Port number      ณ                       ณ all transmit flow control restraints  |
+ณ       ณ               ณ     (NOP if DX=00FFh) ณ                       ณ (such as an XOFF received from remote)|
+ณ       ณ               ณ                       ณ                       ณ Init (Function 4) or UnInit (Function |
+ณ       ณ               ณ                       ณ                       ณ 5) will stop an in-progress Break.    |
+ณ       ณ               ณ                       ณ                       ณ Note: the application must determine  |
+ณ       ณ               ณ                       ณ                       ณ the "length" of the BREAK.            |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  1Bh  ณ GetDriverInfo ณ CX = Size of buffer   ณ AX = Number of bytes  ณ Offset 0 (word) = Structure size      |
+ณ       ณ               ณ ES = Segment of       ณ      transferred      ณ        2 (byte) = FOSSIL spec version |
+ณ       ณ               ณ      user buffer      ณ                       ณ        3 (byte) = Driver rev level    |
+ณ       ณ               ณ DI = Offset of        ณ User buffer contains  ณ        4 (dwrd) = Pointer to ASCII ID |
+ณ       ณ               ณ      user buffer      ณ info structure (used  ณ        8 (word) = Input buffer size   |
+ณ       ณ               ณ DX = Port number      ณ to get special data   ณ       0A (word) = Bytes avail (input) |
+ณ       ณ               ณ      (If DX=00FF,     ณ from the driver)      ณ       0C (word) = Output buffer size  |
+ณ       ณ               ณ      port data will   ณ                       ณ       0E (word) = Bytes avail (output)ณ
+ณ       ณ               ณ      not be valid).   ณ                       ณ       10 (byte) = Screen width, chars ณ
+ณ       ณ               ณ For port data to be   ณ                       ณ       11 (byte) = Screen height, charsณ
+ณ       ณ               ณ accurate,  port must  ณ                       ณ       12 (byte) = Baud rate mask      ณ
+ณ       ณ               ณ be active.            ณ                       ณ                   (See call 00h)      ณ
+ณ       ณ               ณ                       ณ                       ณ                                       ณ
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+
+ฺฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤยฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฟ
+ณ Code  ณ   Function    ณ  Function Parameters  ณ  Returned by Function ณ Explanation                           ณ
+รฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤลฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  7Eh  ณ Install user  ณ AL = Appendage code   ณ AX = 1954h - FOSSIL   ณ Used to install user appendages into  |
+ณ       ณ appendage     ณ ES = Segment of user  ณ      driver present   ณ the INT 14h dispatcher.  Appendage    |
+ณ       ณ               ณ      appendage entry  ณ    = Anything but     ณ codes 80h - BF are supported.  Codes  |
+ณ       ณ               ณ      point            ณ      1954h - FOSSIL   ณ 80h - 83h are reserved.  The error    |
+ณ       ณ               ณ DX = Offset of user   ณ      driver not       ณ return,  BH = 00h and AX = 1954h,     |
+ณ       ณ               ณ      appendage entry  ณ      present          ณ should mean that another appendage    |
+ณ       ณ               ณ      point            ณ BL = Code assigned to ณ has already been installed with the   |
+ณ       ณ               ณ                       ณ      appendage (same  ณ code specified in AL.  The appendage  |
+ณ       ณ               ณ                       ณ      as AL at entry)  ณ will be entered via a far call when-  |
+ณ       ณ               ณ                       ณ BH = 01h - Operation  ณ ever INT 14h call is made with AL     |
+ณ       ณ               ณ                       ณ      successful       ณ equal to the appendage code.  The     |
+ณ       ณ               ณ                       ณ    = 00h - Operation  ณ appendage should return to the INT    |
+ณ       ณ               ณ                       ณ      unsuccessful     ณ 14h dispatcher via a far return.  The |
+ณ       ณ               ณ                       ณ                       ณ INT 14h dispatcher should not modify  |
+ณ       ณ               ณ                       ณ                       ณ any registers prior to making the far |
+ณ       ณ               ณ                       ณ                       ณ call to the appendage and after the   |
+ณ       ณ               ณ                       ณ                       ณ appendage returns control to the      |
+ณ       ณ               ณ                       ณ                       ณ dispatcher.                           |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ฦอออออออุอออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออุอออออออออออออออออออออออออออออออออออออออต
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ณ  7Fh  ณ Remove user   ณ AL = Appendage code   ณ AX = 1954h            ณ Used to remove a user appendage that  |
+ณ       ณ appendage     ณ ES = Segment of user  ณ BL = Code assigned to ณ was installed using function 7Fh. An  |
+ณ       ณ               ณ      appendage entry  ณ      appendage (same  ณ error return means that either the    |
+ณ       ณ               ณ      point            ณ      as AL at entry)  ณ entry point specified in ES:DX did    |
+ณ       ณ               ณ DX = Offset of user   ณ BH = 01h - Operation  ณ not match the entry point currently   |
+ณ       ณ               ณ      appendage entry  ณ      successful       ณ in the dispatcher table for the code  |
+ณ       ณ               ณ      point            ณ    = 00h - Operation  ณ given in AL,  or that no entry for    |
+ณ       ณ               ณ                       ณ      unsuccessful     ณ the code given in AL currently exits. |
+ณ       ณ               ณ                       ณ                       ณ                                       |
+ภฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤมฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
+

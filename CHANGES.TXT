@@ -1,0 +1,118 @@
+ProBoard v2.20.00
+-----------------
+
+* ProBoard now has a new registration scheme.  It no longer uses the 
+  REGKEY.PB file to store your registration information.  Now, your
+  registration information is burned into the PROBOARD.EXE file itself.
+  I know there are going to be a lot of people out there who won't like
+  this change in the slightest, but it's really for new customers of
+  ProBoard.  With ProBoard v2.2, new customers don't automatically get
+  an unlimited node license when they buy a copy.  They purchase the
+  number of nodes they want to run.  The key is the serial number and
+  the activation code which is used to unlock the software.  This
+  information tells ProBoard how many nodes it will allow.  Now, for all
+  those people who already own existing copies of ProBoard, you will
+  automatically be upgraded to an unlimited node license as part of your
+  upgrade.
+
+  How do I upgrade to v2.2, and get it registered?  It's a four-step
+  process.
+
+  Step 1: Download ProBoard v2.2 (which you've already done, or you
+          wouldn't be seeing this file).
+
+  Step 2: Run the program included with ProBoard 2.2 called REGINFO.EXE.
+          This will read your REGKEY.PB file, and extract out the old
+          registration information.  It will then display an eight-digit
+          code on the screen which is your Upgrade-ID code.  This code
+          will be crucial in the next step.
+
+  Step 3: Visit the TeleGrafix Web site at http://www.telegrafix.com,
+          and purchase your upgrade.  While you're filling out the
+          upgrade form, you'll be asked for your Upgrade-ID code, the
+          name of the SysOp and the BBS name as they appear in ProCFG.
+          The Web site will compare this information against the data
+          encoded in your Upgrade-ID code, and if they match, you'll 
+          automatically be given your new registration information.
+
+          NOTE: A single BBS can only be upgraded once, to prevent pirates
+                from stealing your registration information!
+
+  Step 4: Run the REGISTER.EXE program, and key-in the newly assigned
+          serial number and activation code.
+
+  That's all there is to it.  You're ready to go online with a fully
+  functioning ProBoard system.
+
+* New look and feel for the main console.
+  
+* Fixed a minor centering problem in the "last caller" field.
+  
+* Added a new option to the status bar (ALT-J) to "Jump to DOS".  This
+  option was already available in the software, but it wasn't documented
+  on the main console screen.
+  
+* Added five new functions to the ProBoard PEX SDK:
+  
+       fileno()
+       getcurdir()
+       getdisk()
+       _dos_getftime()
+       _dos_setftime()
+
+* Changed message 361 in the language files to make room for the expanded
+  year string.
+
+* Updated ProCFG.EXE to properly handle four-byte year data entry.  The
+  expiration date can be set to "00/00/0000" to indicate no expiration
+  date.
+
+* The new user signup now allows you to select from the updated date
+  formats:
+
+     MM/DD/YYYY
+     YYYY/MM/DD
+     DD/MM/YYYY
+
+* The new user signup now forces you to enter four-digit years when asked
+  to enter your date of birth.
+
+* The file system now forces you to enter four-digit years when entering a
+  date to search for files by.
+
+* Fixed a potentially serious bug with the birthdate asking code.  There
+  were circumstances when it might generate a garbled birthdate.
+
+* Added a new macro code to ".A?? File Control Codes".  The new code is
+  "^F;" (i.e., 06-59).  This code displays the user's password, or if the
+  "Hide Password" option is enabled in ProCFG, then this option will display
+  the password hiding character as defined in ProCFG.  
+  
+* The default SETUP.* menu files have been changed to use the new "^F;" 
+  macro code instead of "^FC" for the password display to properly support
+  the Hide Password option.
+
+* Changed the look and feel of the SysOp functions F1 and Shift-F1 to be
+  more consistent with the main console appearance.
+
+* Changed the color of the status line displayed on the main console when
+  a user is logged in.  The new color is more like the main console.
+
+* Changed the entire look and feel of ProCFG to be more similar to the BBS
+  main console.
+
+* Fixed a bug with ProCFG where if you make changes to the system
+  configuration data, the inappropriate action was taken when you chose to
+  save or cancel the changes when you exit.  I don't know if this was
+  present in the release version of v2.16, but in the code obtained from
+  the author, the exact opposite operation was performed.  If you decided 
+  to abandon the changes, they got saved instead, and vice-versa.
+
+* Updated the PB_SDK header, and the library.  Several of the data 
+  structures in PB_SDK.H have been updated to be accurate with regard to
+  ProBoard v2.2 compatibility.  The .LIB file has also been rebuilt to
+  be v2.2 compliant.
+
+----------------------------------------------------------------------------
+                                     # # #
+----------------------------------------------------------------------------
