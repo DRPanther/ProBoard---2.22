@@ -1,0 +1,41 @@
+## Makefile for ProBoard v1.xx
+
+## Caution!! The standard Borland C++ library has to be changed before compiling
+## ProBoard v1.30 - The __NFILE__ macro in the file _nfile.h should be changed to
+## 100. The files FILES.C and FILES2.C in the RTL\CLIB directory should be
+## recompiled using all memory models, and updated in C?.LIB
+
+
+MODEL   = LARGE
+OVERLAY = 1
+
+OBJS = exec.obj      io.obj        fossil.obj    menu.obj                   \
+       chat.obj      shell.obj     login.obj     pbuser.obj    readmsg.obj  \
+       misc.obj      timer.obj     mailchk.obj   msg.obj       zip.obj      \
+       writemsg.obj  tops.obj      forward.obj   replymsg.obj  timestat.obj \
+       msgdel.obj    combined.obj  question.obj  aka.obj       qscanmsg.obj \
+       showmsg.obj   scanmsg.obj   version.obj   rawdir.obj    msged.obj    \
+       dl.obj        viewfile.obj  lastcall.obj  desqview.obj  stacking.obj \
+       cleanup.obj   sysopkey.obj  msgfind.obj   binlog.obj    protocol.obj \
+       listfile.obj  ul.obj        tag.obj       sellang.obj   proboard.obj \
+       nodelist.obj  online.obj    msgmove.obj   cdrom.obj     regis.obj    \
+       mchat.obj     setarea.obj   usered.obj    deckey.obj    music.obj    \
+       gif.obj       msgexprt.obj  help.obj      ega.obj       event.obj    \
+       filearea.obj  msgarea.obj   timelog.obj   wordwrap.obj  showans.obj  \
+       userset.obj   usage.obj     loadpex.obj   image.obj     postmsg.obj  \
+       pexcall.obj   strvars.obj   userwin.obj   bulletin.obj  modem.obj    \
+       execheck.obj  language.obj  fuzzy.obj     terminal.obj  squish.obj   \
+       hudson.obj    msgbase.obj   mark.obj      rip.obj       jam.obj      \
+       inpdate.obj   tag_rw.obj
+
+
+OVLOBJS = $(OBJS,Nexec\.obj,Nio\.obj,Nfossil\.obj,Ntimer\.obj,Nmisc\.obj)
+
+TSLIB   = 1
+TSWIN   = 1
+SQUISH  = 1
+PBLIB   = 1
+
+#----------------------------------------------------------------------------#
+
+ProBoard.exe: $(OBJS)

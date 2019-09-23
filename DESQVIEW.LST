@@ -1,0 +1,96 @@
+Turbo Assembler	 Version 3.1	    05/19/99 18:58:12	    Page 1
+desqview.asm
+
+
+
+      1
+      2				     % MODEL MEM_MOD
+1     3	0000			      MODEL LARGE
+      4
+      5				     public _DV_timeslice
+      6				     public _DV_start_critical
+      7				     public _DV_end_critical
+      8
+      9				     extrn  _desqview :	WORD
+     10
+     11	0000			      CODESEG
+     12
+     13	0000			     PROC API near
+     14	0000  50			  push ax
+     15	0001  83 3E 0000e 00		  cmp  [_desqview],0
+     16	0006  74 10			  je no
+     17	0008  B8 101A			  mov  ax,101Ah
+     18	000B  CD 15			  int  15h
+     19	000D  8B C3			  mov  ax,bx
+     20	000F  CD 15			  int  15h
+     21	0011  B8 1025			  mov  ax,1025h
+     22	0014  CD 15			  int  15h
+     23	0016  EB 05			  jmp short end_api
+     24	0018			     no:
+     25	0018  B8 1680			  mov  ax,1680h
+     26	001B  CD 2F			  int  2fh
+     27	001D			     end_api:
+     28	001D  58			  pop  ax
+     29	001E  C3			  ret
+     30	001F			     ENDP API
+     31
+     32	001F			     PROC _DV_timeslice
+     33	001F  BB 1000			  mov  bx,1000h
+     34	0022  E8 FFDB			  call API
+     35	0025  CB			  ret
+     36	0026			     ENDP _DV_timeslice
+     37
+     38	0026			     PROC _DV_start_critical
+     39	0026  BB 101B			  mov  bx,101Bh
+     40	0029  E8 FFD4			  call API
+     41	002C  CB			  ret
+     42	002D			     ENDP _DV_start_critical
+     43
+     44	002D			     PROC _DV_end_critical
+     45	002D  BB 101B			  mov  bx,101Bh
+     46	0030  E8 FFCD			  call API
+     47	0033  CB			  ret
+     48	0034			     ENDP _DV_end_critical
+     49
+     50				      END
+Turbo Assembler	 Version 3.1	    05/19/99 18:58:12	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "05/19/99"
+??FILENAME			  Text	 "desqview"
+??TIME				  Text	 "18:58:12"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 DESQVIEW_TEXT
+@CODESIZE			  Text	 1
+@CPU				  Text	 0101H
+@CURSEG				  Text	 DESQVIEW_TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 1
+@FILENAME			  Text	 DESQVIEW
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 5
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+API (API)			  Near	 DESQVIEW_TEXT:0000
+END_API				  Near	 DESQVIEW_TEXT:001D
+MEM_MOD				  Text	 LARGE
+NO				  Near	 DESQVIEW_TEXT:0018
+_DESQVIEW (_desqview)		  Word	 ----:---- Extern
+_DV_END_CRITICAL	       +  Far	 DESQVIEW_TEXT:002D
+(_DV_end_critical)
+_DV_START_CRITICAL	       +  Far	 DESQVIEW_TEXT:0026
+(_DV_start_critical)
+_DV_TIMESLICE (_DV_timeslice)	  Far	 DESQVIEW_TEXT:001F
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DESQVIEW_TEXT			  16  0034 Word	  Public  CODE
+DGROUP				  Group
+  _DATA				  16  0000 Word	  Public  DATA
+

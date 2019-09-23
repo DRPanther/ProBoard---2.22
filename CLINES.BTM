@@ -1,0 +1,92 @@
+setlocal
+
+set total=0
+set sizetotal=0
+
+echo ----------------------------------------------------------------
+echo SOURCE FILE SIZE REPORT FOR %_DATE , %_TIME
+echo.
+echos PROBOARD.EXE...
+cd \cpp\pb\proboard
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp *.asm) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos PROCFG.EXE.....
+cd \cpp\pb\procfg
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos PBUTIL.EXE.....
+cd \cpp\pb\pbutil
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos PBLIB.LIB......
+cd \cpp\pb\lib
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos CONVERT.EXE....
+cd \cpp\pb\convert
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos TSLIB.LIB......
+cd \cpp\lib\tslib
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp *.asm) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+echos TSWIN.LIB......
+cd \cpp\lib\tswin
+set subtotal=0
+set sizesubtotal=0
+for %a in (*.cpp *.hpp *.asm) do (
+        set subtotal=%@eval[%subtotal+%@lines[%a]+1]
+        set sizesubtotal=%@eval[%sizesubtotal+%@filesize[%a,b]]
+       )
+echo %@substr[    ,0,%@eval[6-%@len[%subtotal]]] %subtotal (%@substr[    ,0,%@eval[4-%@len[%@int[%@eval[%sizesubtotal/1024]]]]]%@int[%@eval[%sizesubtotal/1024]]k)
+set total=%@eval[%total+%subtotal]
+set sizetotal=%@eval[%sizetotal+%sizesubtotal]
+
+echo.
+echo TOTAL LINES..... %total
+echo TOTAL SIZE...... %@int[%@eval[%sizetotal/1024]] Kb
+
+endlocal
+
