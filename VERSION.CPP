@@ -6,18 +6,24 @@ version_info(char *)
 {
      LOG(2,"Version info requested");
 
-     io << "\f\n\7"
+ io << "\f\n\7"
      " ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿\n"
      " ³ ProBoard version " VERSION;
 
      for(int i=0;i<54-strlen(VERSION);i++) io << ' ';
      io << "³\n"
      //io << "\1(c) 1990-1996 Philippe Leybaert \7³\n"
-               " ³                                                                        ³\n";
-     io << "\7 ³ Copyright (c) 1990-1999  TeleGrafix Communications, Inc.               ³\n";
+     io << "\7 ³                                                                        ³\n";
+     io << "\7 ³ Originally written by \3Philippe Leybaert\7                            ³\n";
+     io << "\7 ³ Copyright (c) 1990-2019  \3John Riley, Sr.\7 of \3SLASHER BBS\7        ³\n";
+     io << "\7 ³ Lead Programmer since ProBoard 2.22:  \3Lawrence Stockman\7            ³\n";
      io << "\7 ³ All Rights Reserved                                                    ³\n";
+     io << "\7 ³ ProBoard is now Open Sourced! Free Private and Commercial use Granted! ³\n";
+     io << "\7 ³ ProBoard updates: \3http://rileypcmd.com\3 or \3http://proboardbbs.com\7 ³\n";
+     io << "\7 ³ GNU General Public License v3.0                                        ³\n";
      io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n"
           "\7 ³                                                                        ³\n";
+
 
 
      //----------------------------  
