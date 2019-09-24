@@ -11,8 +11,9 @@ version_info(char *)
      " ³ ProBoard version " VERSION;
 
      for(int i=0;i<54-strlen(VERSION);i++) io << ' ';
-     io << "³\n"
-     //io << "\1(c) 1990-1996 Philippe Leybaert \7³\n"
+	 io << "³\n";
+	 io << " ³ \1(c) 2019 John Riley\7                                                    ³\n";
+	 io << " ³ \1(c) Originally Developed by Philippe Leybaert\7                          ³\n";
                " ³                                                                        ³\n";
      io << "\7 ³ Copyright (c) 1990-2019  ProBoard Developmment Ninja Team              ³\n";
      io << "\7 ³ All Rights Reserved                                                    ³\n";
