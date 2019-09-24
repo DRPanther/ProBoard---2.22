@@ -1186,14 +1186,14 @@ bool check_trashcan( char *username )
 
 void show_intro()
 {
-     char *notregstr = " [UNREGISTERED] Ä Node %d\nCopyright (c) 1990-1999  TeleGrafix Communications, Inc.  All Rights Reserved\n";
+     char *notregstr = " [FREEWARE] Ä Node %d\nCopyright (c) 1990-2019  ProBoard Development Ninja Team. All Rights Reserved\n";
 //   char *notregstr = " [UNREGISTERED] Ä Node %d Ä Copyright (c) 1990,99  TeleGrafix Communications\n\n";
 //   char *notregstr = " [UNREGISTERED]  ÄÄ Node %d ÄÄ   (c) 1990-1997  Philippe Leybaert\n\n";
      long  checksum  = 0;
      int   i;
 
 
-     for ( i = 0;  i  <  strlen( notregstr );  i++ )
+     /*for ( i = 0;  i  <  strlen( notregstr );  i++ )
      {
           checksum  +=  notregstr[ i ];
      }
@@ -1205,7 +1205,7 @@ void show_intro()
      if ( checksum != 8235 ) 
      {
           exit_proboard();
-     }
+     }*/
 
 
      io << "\x1b[5n\x1b[!\r";

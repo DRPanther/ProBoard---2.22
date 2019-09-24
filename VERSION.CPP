@@ -14,9 +14,9 @@ version_info(char *)
      io << "³\n"
      //io << "\1(c) 1990-1996 Philippe Leybaert \7³\n"
                " ³                                                                        ³\n";
-     io << "\7 ³ Copyright (c) 1990-1999  TeleGrafix Communications, Inc.               ³\n";
+     io << "\7 ³ Copyright (c) 1990-2019  ProBoard Developmment Ninja Team              ³\n";
      io << "\7 ³ All Rights Reserved                                                    ³\n";
-     io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n"
+     //io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n"
           "\7 ³                                                                        ³\n";
 
 
@@ -43,10 +43,7 @@ version_info(char *)
                              software_serial_number(),
                              max_node_count ) );
           }
-          io << "\7 ³ \7Registered to:\6 " << form("%-36s",registered_user_name() ) << "\7                    ³\n"
-                "\7 ³                \6"   << form("%-36s",cfg.bbsname ) << "\7                    ³\n"
-                "\7 ³ \7Serial number:\6 " << form("%-48.48s", buf ) << "\7        ³\n"
-                "\7 ³                                                                        ³\n";
+         
      }
      else
      {

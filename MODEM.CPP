@@ -241,7 +241,7 @@ do_modem(modem_response *response)
      }
 
      tsw_centerline( 4, 
-                     "Copyright (c) 1990-1999  TeleGrafix Communications, Inc.",
+                     "Copyright (c) 1990-2019   ProBoard Development Ninja Team",
                      TITLE_COLOR );
 
      tsw_centerline( 5, 
