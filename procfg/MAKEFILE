@@ -1,0 +1,22 @@
+## Makefile for ProCFG
+
+OBJS = procfg.obj editaka.obj editlim.obj editmac.obj \
+       editmenu.obj editarea.obj editpb.obj editprot.obj editsys.obj \
+       edituser.obj events.obj editpvt.obj language.obj sel_lang.obj \
+       extsel.obj flags.obj promisc.obj editvtpl.obj template.obj     \
+       editgrp.obj editlcol.obj editnode.obj area.obj misc.obj
+
+MODEL   = LARGE
+OVERLAY = 1
+
+OVLOBJS = $(OBJS,Ntemplate\.obj,Nedituser\.obj,Narea\.obj)
+
+TSLIB = 1
+TSWIN = 1
+PBLIB = 1
+
+LIBS = \cpp\lib\pb\proboard.lib \cpp\lib\th\thehouse.lib
+
+CFLAGS = -I\cpp\lib\pb -I\cpp\lib\th
+
+ProCFG.EXE: $(OBJS)

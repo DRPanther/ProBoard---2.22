@@ -1,0 +1,1 @@
+copy procfg.exe \proboard
