@@ -6,24 +6,19 @@ version_info(char *)
 {
      LOG(2,"Version info requested");
 
- io << "\f\n\7"
-     " ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿\n"
-     " ³ ProBoard version " VERSION;
+     io << "\f\n\7"
+     " ÃšÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â¿\n"
+     " Â³ ProBoard version " VERSION;
 
      for(int i=0;i<54-strlen(VERSION);i++) io << ' ';
-     io << "³\n"
-     //io << "\1(c) 1990-1996 Philippe Leybaert \7³\n"
-     io << "\7 ³                                                                        ³\n";
-     io << "\7 ³ Originally written by \3Philippe Leybaert\7                            ³\n";
-     io << "\7 ³ Copyright (c) 1990-2019  \3John Riley, Sr.\7 of \3SLASHER BBS\7        ³\n";
-     io << "\7 ³ Lead Programmer since ProBoard 2.22:  \3Lawrence Stockman\7            ³\n";
-     io << "\7 ³ All Rights Reserved                                                    ³\n";
-     io << "\7 ³ ProBoard is now Open Sourced! Free Private and Commercial use Granted! ³\n";
-     io << "\7 ³ ProBoard updates: \3http://rileypcmd.com\3 or \3http://proboardbbs.com\7 ³\n";
-     io << "\7 ³ GNU General Public License v3.0                                        ³\n";
-     io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n"
-          "\7 ³                                                                        ³\n";
-
+	 io << "Â³\n";
+	 io << " Â³ \1(c) 2019 John Riley\7                                                    Â³\n";
+	 io << " Â³ \1(c) Originally Developed by Philippe Leybaert\7                          Â³\n";
+               " Â³                                                                        Â³\n";
+     io << "\7 Â³ Copyright (c) 1990-2019  ProBoard Developmment Ninja Team              Â³\n";
+     io << "\7 Â³ All Rights Reserved                                                    Â³\n";
+     //io << "\7 Â³Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â³\n"
+          "\7 Â³                                                                        Â³\n";
 
 
      //----------------------------  
@@ -49,24 +44,21 @@ version_info(char *)
                              software_serial_number(),
                              max_node_count ) );
           }
-          io << "\7 ³ \7Registered to:\6 " << form("%-36s",registered_user_name() ) << "\7                    ³\n"
-                "\7 ³                \6"   << form("%-36s",cfg.bbsname ) << "\7                    ³\n"
-                "\7 ³ \7Serial number:\6 " << form("%-48.48s", buf ) << "\7        ³\n"
-                "\7 ³                                                                        ³\n";
+         
      }
      else
      {
-          io << " ³ \6UNREGISTERED EVALUATION VERSION                                        ³\n"
-                "\7 ³                                                                        ³\n";
+          io << " Â³ \6UNREGISTERED EVALUATION VERSION                                        Â³\n"
+                "\7 Â³                                                                        Â³\n";
      }
 
 
-     io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n";
+     io << "\7 Â³Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â³\n";
 
-     io <<   " ³ JAM(mbp) - Copyright 1993 Joaquim Homrighausen, Andrew Milner,         ³\n"
-          " ³                           Mats Birch, Mats Wallin.                     ³\n"
-          " ³                           ALL RIGHTS RESERVED.                         ³\n";
-     io << "\7 ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ\n\n  "
+     io <<   " Â³ JAM(mbp) - Copyright 1993 Joaquim Homrighausen, Andrew Milner,         Â³\n"
+          " Â³                           Mats Birch, Mats Wallin.                     Â³\n"
+          " Â³                           ALL RIGHTS RESERVED.                         Â³\n";
+     io << "\7 Ã€Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã™\n\n  "
      << S_PRESS_ENTER_TO_CONTINUE;
 }
 
