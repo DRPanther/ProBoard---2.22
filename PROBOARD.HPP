@@ -4,9 +4,9 @@
 #include <tslib.hpp>
 #include <time.h>
 
-#define VERSION            "2.22"
-#define TEARVERSION        "2.22"
-#define PID_STRING         "ProBoard 2.22"
+#define VERSION            "2.22b"
+#define TEARVERSION        "2.22b"
+#define PID_STRING         "ProBoard 2.22b"
 #define PID_STRING_HUDSON  PID_STRING " H"
 #define PID_STRING_SQUISH  PID_STRING " S"
 #define PID_STRING_JAM     PID_STRING " J"
