@@ -2,7 +2,7 @@
 #define Use_LinkedList
 #define Use_Handlers
 
-#define INCLUDE_REGIS
+//#define INCLUDE_REGIS
 
 #include <string.h>
 #include <stdlib.h>
@@ -47,8 +47,8 @@ bool quiet          = FALSE;
 bool echo_entered   = FALSE;
 bool net_entered    = FALSE;
 
-bool registered     = FALSE;
-word max_node_count = 2;
+bool registered     = TRUE;
+word max_node_count = 255;
 
 bool menuchanged    = TRUE;
 bool updatemenu     = TRUE;
@@ -631,14 +631,14 @@ init()
           // trying to hardcode these values
           //-------------------------------------
 
-          exit_proboard();
+          //exit_proboard();
      }
 
 
-     CHECK_REG();
+     //CHECK_REG();
 
 
-#ifdef KEY_NEEDED
+/*#ifdef KEY_NEEDED
 
      if ( ! registered )
      {
@@ -647,14 +647,14 @@ init()
           exit_proboard();
      }
 
-#endif
+#endif */
 
 
      //-------------------------------------  
      // Check the node count of this license
      //-------------------------------------  
 
-     if ( registered )
+     /*if ( registered )
      {
           if ( max_node_count != 0 )
           {
@@ -689,7 +689,7 @@ init()
 
                exit_proboard();
           }
-     }
+     }*/
 
 
      if ( tsw_OS == OS_DESQVIEW ) 
