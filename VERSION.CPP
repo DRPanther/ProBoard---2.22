@@ -7,18 +7,18 @@ version_info(char *)
      LOG(2,"Version info requested");
 
      io << "\f\n\7"
-     " ÃšÃ„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â¿\n"
-     " Â³ ProBoard version " VERSION;
+     " ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿\n"
+     " ³ ProBoard version " VERSION;
 
      for(int i=0;i<54-strlen(VERSION);i++) io << ' ';
-	 io << "Â³\n";
-	 io << " Â³ \1(c) 2019 John Riley\7                                                    Â³\n";
-	 io << " Â³ \1(c) Originally Developed by Philippe Leybaert\7                          Â³\n";
-               " Â³                                                                        Â³\n";
-     io << "\7 Â³ Copyright (c) 1990-2019  ProBoard Developmment Ninja Team              Â³\n";
-     io << "\7 Â³ All Rights Reserved                                                    Â³\n";
-     //io << "\7 Â³Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â³\n"
-          "\7 Â³                                                                        Â³\n";
+	 io << "³\n";
+	 io << " ³ \1(c) 2019 John Riley\7                                                    ³\n";
+	 io << " ³ \1(c) Originally Developed by Philippe Leybaert\7                          ³\n";
+               " ³                                                                        ³\n";
+     io << "\7 ³ Copyright (c) 1990-2019  ProBoard Developmment Ninja Team              ³\n";
+     io << "\7 ³ All Rights Reserved                                                    ³\n";
+     //io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n"
+          "\7 ³                                                                        ³\n";
 
 
      //----------------------------  
@@ -48,17 +48,17 @@ version_info(char *)
      }
      else
      {
-          io << " Â³ \6UNREGISTERED EVALUATION VERSION                                        Â³\n"
-                "\7 Â³                                                                        Â³\n";
+          io << " ³ \6UNREGISTERED EVALUATION VERSION                                        ³\n"
+                "\7 ³                                                                        ³\n";
      }
 
 
-     io << "\7 Â³Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Â³\n";
+     io << "\7 ³ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ³\n";
 
-     io <<   " Â³ JAM(mbp) - Copyright 1993 Joaquim Homrighausen, Andrew Milner,         Â³\n"
-          " Â³                           Mats Birch, Mats Wallin.                     Â³\n"
-          " Â³                           ALL RIGHTS RESERVED.                         Â³\n";
-     io << "\7 Ã€Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã„Ã™\n\n  "
+     io <<   " ³ JAM(mbp) - Copyright 1993 Joaquim Homrighausen, Andrew Milner,         ³\n"
+          " ³                           Mats Birch, Mats Wallin.                     ³\n"
+          " ³                           ALL RIGHTS RESERVED.                         ³\n";
+     io << "\7 ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ\n\n  "
      << S_PRESS_ENTER_TO_CONTINUE;
 }
 
